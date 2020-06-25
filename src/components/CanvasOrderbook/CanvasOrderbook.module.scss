@@ -1,0 +1,56 @@
+.canvasOrderbook {
+  width: 500px;
+  border: 1px solid black;
+
+  .container {
+    height: 400px;
+    width: 100%;
+  }
+
+  .bookContainer {
+    width: 500px;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    .row {
+      display: flex;
+      width: 100%;
+
+      & > div {
+        display: flex;
+        flex: 1 1 33%;
+        width: 33%;
+        padding: 0 3px;
+        height: 20px;
+        align-items: center;
+
+        &.text-right {
+          text-align: right;
+          justify-content: flex-end;
+        }
+      }
+    }
+
+    .bookHead {
+      height: 27px;
+      display: flex;
+      align-items: center;
+      background-color: lightgray;
+      padding-right: 0.5rem;
+
+      .row {
+        & > div {
+          font-family: 'Segoe UI Bold';
+        }
+      }
+    }
+
+    &.asks {
+      .bookHead {
+        height: 27px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

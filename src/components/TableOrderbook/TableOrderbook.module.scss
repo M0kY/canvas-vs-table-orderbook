@@ -1,0 +1,77 @@
+.tableOrderbook {
+  width: 500px;
+  border: 1px solid black;
+
+  .bookContainer {
+    display: flex;
+    width: 500px;
+    flex-wrap: wrap;
+
+    .row {
+      display: flex;
+      width: 100%;
+
+      & > div {
+        display: flex;
+        flex: 1 1 33%;
+        width: 33%;
+        padding: 0 3px;
+        height: 20px;
+        align-items: center;
+
+        &.value {
+          justify-content: flex-end;
+          padding-right: calc(0.5rem + 3px);
+        }
+
+        &.text-right {
+          text-align: right;
+          justify-content: flex-end;
+        }
+      }
+    }
+
+    .bookHead {
+      display: block;
+      width: 100%;
+      background-color: lightgray;
+      padding-right: 0.5rem;
+
+      .row {
+        & > div {
+          font-family: 'Segoe UI Bold';
+        }
+      }
+    }
+
+    &.asks {
+      .bookHead {
+        height: 27px;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .bookBody {
+      height: 400px;
+      width: 500px;
+
+      .row {
+        font-size: 14px;
+        color: gray;
+      }
+
+      .loading {
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        & > div {
+          width: 100%;
+          justify-content: center;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
