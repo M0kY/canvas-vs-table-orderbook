@@ -22,11 +22,6 @@ interface IDepthMessage {
   a: Array<[string, string]>;
 }
 
-// interface IDepthLoad {
-//   lastUpdateId: number;
-//   loaded: boolean;
-// }
-
 export const useFetchOrderBook = (limit: number = 100) => {
   const [bookState, setBookState] = useState<IOrderbookSnapshot | null>(null);
   const marketDepthSocket = useRef<WebSocket>();
@@ -34,7 +29,7 @@ export const useFetchOrderBook = (limit: number = 100) => {
   const depthLoaded = useRef<IOrderbookSnapshot>();
 
   useEffect(() => {
-    marketDepthSocket.current = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@depth');
+    marketDepthSocket.current = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@depth@100ms');
     marketDepthSocket.current.onopen = () => {
       if (marketDepthSocket.current && marketDepthSocket.current.readyState === 1) {
         (async () => {
@@ -52,11 +47,8 @@ export const useFetchOrderBook = (limit: number = 100) => {
           });
           bufferedBook.current = [];
 
-          setBookState({
-            ...data,
-            asks,
-            bids,
-          });
+          depthLoaded.current = { ...data, asks, bids };
+          setBookState({ ...data, asks, bids });
         })();
       }
     };
@@ -75,7 +67,8 @@ export const useFetchOrderBook = (limit: number = 100) => {
           SortDirection.DESC,
         );
 
-        setBookState((prevState) => ({ ...prevState!, asks: newAsks, bids: newBids }));
+        depthLoaded.current = { ...depthLoaded.current, asks: newAsks, bids: newBids };
+        setBookState(depthLoaded.current);
       } else {
         // Buffer for later update
         bufferedBook.current.push(messageData);
@@ -92,12 +85,6 @@ export const useFetchOrderBook = (limit: number = 100) => {
       }
     };
   }, []);
-
-  useEffect(() => {
-    if (bookState) {
-      depthLoaded.current = bookState;
-    }
-  }, [bookState]);
 
   return { bids: bookState?.bids.slice(0, limit) || [], asks: bookState?.asks.slice(0, limit) || [] };
 };
