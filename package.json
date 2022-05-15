@@ -6,7 +6,7 @@
     "konva": "^7.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-konva": "^16.13.0-3",
+    "react-konva": "^18.0.0",
     "simplebar-react": "^2.2.1",
     "typescript": "^3.9.5"
   },
