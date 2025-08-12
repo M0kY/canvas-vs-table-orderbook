@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "konva": "^7.0.0",
+    "konva": "^9.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-konva": "^16.13.0-3",
